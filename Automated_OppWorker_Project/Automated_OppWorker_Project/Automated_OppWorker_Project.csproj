@@ -53,6 +53,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +77,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Import_File_Handler\Import_File_Handler.csproj">
+      <Project>{2a343210-85cb-494c-8ae0-728a4d273ee0}</Project>
+      <Name>Import_File_Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Machform_Entry_Downloader\Machform_Entry_Downloader.csproj">
+      <Project>{0ee22174-262c-49da-9a77-9ebd75a98834}</Project>
+      <Name>Machform_Entry_Downloader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OppEntry_Html_Creator\OppEntry_Html_Creator.csproj">
+      <Project>{c802c4f2-22d2-4064-b85c-6c027ff190ca}</Project>
+      <Name>OppEntry_Html_Creator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Opp_Email_Manager\Opp_Email_Manager.csproj">
+      <Project>{1ba01448-4ce4-4232-95b7-a99669495e32}</Project>
+      <Name>Opp_Email_Manager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

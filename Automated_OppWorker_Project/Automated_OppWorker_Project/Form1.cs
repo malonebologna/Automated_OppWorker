@@ -21,17 +21,25 @@ namespace Automated_OppWorker_Project
 
         private void goButton_Click(object sender, EventArgs e)
         {
+            string oppContactsFolderLocation = @"C:\Users\FTCC\Desktop\Opportunities";
+            string machformEntryFile = @"C:\Users\FTCC\Desktop\OppTester\BDSOpportunityAssignment.xlsx";
+            string htmlTemplateFile = @"C:\Users\FTCC\Desktop\OppTester\OppEmailHTML.html";
+
             OppEntry_Html_Creator.EntryManager entryManager = new EntryManager();
             OppEntry_Html_Creator.HTMLCreator htmlCreator = new HTMLCreator();
             Opp_Email_Manager.EmailCreator emailCreator = new EmailCreator();
 
-            List<string[]> oppEntryList = entryManager.GetEntriesFromFile(@"C:\Users\FTCC\Desktop\BDSOpportunityAssignment.xlsx");
-            foreach (string[] oppEntryDetails in oppEntryList)
+            List<string[]> oppList = entryManager.GetEntriesFromFile(machformEntryFile);
+            foreach (string[] oppEntryFormData in oppList)
             {
-                string html = htmlCreator.UpdateEmailHTML(oppEntryDetails, @"C:\Users\FTCC\Desktop\OppEmailHTML.html");
+                string solicationNumber = oppEntryFormData[0];
+                string oppTitle = oppEntryFormData[3];
+                string bdsEmailAddress = oppEntryFormData[2];
+                string html = htmlCreator.UpdateEmailHTML(oppEntryFormData, htmlTemplateFile);
 
-                emailCreator.CreateEmailWithContacts(emailCreator.GetContactsFromFile(oppEntryDetails[0],@"C:\Users\FTCC\Desktop\OppTester")
-                ,oppEntryDetails[3] , html, oppEntryDetails[2]);
+                emailCreator.CreateEmailWithContacts(
+                emailCreator.GetContactsFromFile(solicationNumber, oppContactsFolderLocation)
+                , oppTitle, html, bdsEmailAddress);
             }
 
             
